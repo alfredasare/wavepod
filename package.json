@@ -19,10 +19,10 @@
 		}
 	},
 	"lint-staged": {
-		"*.+(js|ts|tsx)": [
-			"eslint --fix"
+		"*.{js,ts,tsx}": [
+			"eslint '*/**/*.{js,jsx}' --fix"
 		],
-		"**/*.+(js|json|ts|tsx)": [
+		"**/*.{js|json|ts|tsx}": [
 			"prettier --write",
 			"git add"
 		]
