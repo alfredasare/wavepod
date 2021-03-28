@@ -19,8 +19,13 @@
 		}
 	},
 	"lint-staged": {
+		"*.+(js|ts|tsx)": [
+			"eslint --fix"
+		],
+
 		"**/*.{js|json|ts|tsx}": [
-			"prettier --write"
+			"prettier --write",
+			"git add"
 		]
 	},
 	"dependencies": {
