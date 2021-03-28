@@ -1,9 +1,11 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/utils/*": ["utils/*"],
-      "@/global/*": ["global/*"]
-    }
-  }
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@/utils/*": ["utils/*"],
+			"@/global/*": ["global/*"],
+			"@/components/*": ["components/*"],
+			"@/lib/*": ["lib/*"]
+		}
+	}
 }
