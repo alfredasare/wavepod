@@ -18,6 +18,11 @@
 			"pre-commit": "lint-staged"
 		}
 	},
+	"lint-staged": {
+		"**/*.{js|json|ts|tsx}": [
+			"prettier --write"
+		]
+	},
 	"dependencies": {
 		"gsap": "^3.6.1",
 		"moment": "^2.29.1",
