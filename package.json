@@ -13,13 +13,6 @@
 		"check-format": "npm run prettier -- --list-different",
 		"validate": "npm-run-all --parallel check-format lint"
 	},
-	"lint-staged": {
-		"*.{js,ts,tsx}": "eslint --cache --fix",
-		"**/*.{js|json|ts|tsx}": [
-			"prettier --write",
-			"git add"
-		]
-	},
 	"dependencies": {
 		"gsap": "^3.6.1",
 		"moment": "^2.29.1",
@@ -52,5 +45,8 @@
 	},
 	"simple-git-hooks": {
 		"pre-commit": "npx lint-staged"
+	},
+	"lint-staged": {
+		"*.{js,ts,tsx}": "eslint --cache --fix"
 	}
 }
