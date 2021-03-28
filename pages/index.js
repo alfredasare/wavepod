@@ -1,4 +1,5 @@
 import Head from 'next/head';
+
 import { Container } from '@/global/appGlobal';
 
 export default function Home() {

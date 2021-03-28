@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
+
 import { primaryFont } from '@/utils/index';
 
 export const GlobalStyle = createGlobalStyle`
