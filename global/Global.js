@@ -25,9 +25,4 @@ export const GlobalStyle = createGlobalStyle`
   *, :after, :before {
     box-sizing: border-box;
   }
-  
-  h1 {
-    font-size: 10rem;
-    color: red;
-  }
 `;
