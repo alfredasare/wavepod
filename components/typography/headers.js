@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { palette } from '@/utils/colors';
 import { typography } from '@/utils/typography';
 
 export const HeaderOne = styled.h1`
@@ -9,6 +10,10 @@ export const HeaderOne = styled.h1`
 	font-weight: bold;
 	@media only screen and (min-width: 600px) {
 		font-size: ${typography.headerOne};
+	}
+
+	span {
+		color: ${palette.radicalRed};
 	}
 `;
 
@@ -52,5 +57,9 @@ export const HeaderFive = styled.h5`
 	font-weight: 600;
 	@media only screen and (min-width: 600px) {
 		font-size: ${typography.headerFive};
+	}
+
+	span {
+		color: ${palette.radicalRed};
 	}
 `;
