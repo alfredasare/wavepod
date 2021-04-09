@@ -5,6 +5,7 @@ import FeatureSection from '@/components/feature-section/featureSectionComponent
 import FollowChannel from '@/components/follow-channel/followChannelComponent';
 import Footer from '@/components/footer/footerComponent';
 import Landing from '@/components/landing/landingComponent';
+import NavBar from '@/components/navbar/navbarComponent';
 
 export default function Home() {
 	return (
@@ -12,6 +13,7 @@ export default function Home() {
 			<Head>
 				<title>Welcome to Waveform</title>
 			</Head>
+			<NavBar />
 			<Landing />
 			<About />
 			<FeatureSection

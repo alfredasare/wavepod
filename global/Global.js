@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
 
-import { primaryFont } from '@/utils/index';
+import { palette, primaryFont } from '@/utils/index';
 
 export const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -31,6 +31,33 @@ export const GlobalStyle = createGlobalStyle`
   svg {
     .cls-31 {
       fill: url(#linear-gradient);
+    }
+  }
+
+  .nav-link-active {
+    color: ${palette.radicalRed};
+  }
+
+  .hide-overflow {
+    overflow-y: hidden;
+  }
+
+  @keyframes fade-in {
+    from{
+      opacity: 0;
+    }
+    to{
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
     }
   }
 `;
