@@ -51,7 +51,6 @@ export const HeaderFour = styled.h4`
 
 export const HeaderFive = styled.h5`
 	font-size: ${typography.paragraph};
-	text-align: left;
 	display: block;
 	line-height: 150%;
 	font-weight: 600;
