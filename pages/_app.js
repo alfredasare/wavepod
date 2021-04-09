@@ -1,5 +1,9 @@
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
+
 import Head from 'next/head';
 
+import NavBar from '@/components/navbar/navbarComponent';
 import { GlobalStyle } from '@/global/Global';
 
 function MyApp({ Component, pageProps }) {
@@ -10,6 +14,10 @@ function MyApp({ Component, pageProps }) {
 				<link
 					href='https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap'
 					rel='stylesheet'
+				/>
+				<link
+					rel='stylesheet'
+					href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'
 				/>
 				<script
 					src='https://code.jquery.com/jquery-3.4.1.slim.min.js'
@@ -38,6 +46,7 @@ function MyApp({ Component, pageProps }) {
 				<meta name='msapplication-TileColor' content='#da532c' />
 				<meta name='theme-color' content='#ffffff' />
 			</Head>
+			<NavBar />
 			<Component {...pageProps} />
 		</>
 	);
