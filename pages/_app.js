@@ -1,12 +1,26 @@
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import NavBar from '@/components/navbar/navbarComponent';
 import { GlobalStyle } from '@/global/Global';
 
+const MobilePlayerComponent = dynamic(
+	() => import('../components/mobile-player/mobilePlayerComponent'),
+	{ ssr: false },
+);
+
+const DesktopPlayerComponent = dynamic(
+	() => import('../components/desktop-player/desktopPlayerComponent'),
+	{ ssr: false },
+);
+
 function MyApp({ Component, pageProps }) {
+	const router = useRouter();
+
 	return (
 		<>
 			<GlobalStyle />
@@ -47,6 +61,14 @@ function MyApp({ Component, pageProps }) {
 				<meta name='theme-color' content='#ffffff' />
 			</Head>
 			<NavBar />
+			{router.pathname === '/' ? (
+				<></>
+			) : (
+				<>
+					<MobilePlayerComponent />
+					<DesktopPlayerComponent />
+				</>
+			)}
 			<Component {...pageProps} />
 		</>
 	);
