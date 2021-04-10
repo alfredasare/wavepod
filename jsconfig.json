@@ -5,7 +5,7 @@
 			"@/utils/*": ["utils/*"],
 			"@/global/*": ["global/*"],
 			"@/components/*": ["components/*"],
-			"@/lib/*": ["lib/*"]
+			"@/hooks/*": ["hooks/*"]
 		}
 	}
 }

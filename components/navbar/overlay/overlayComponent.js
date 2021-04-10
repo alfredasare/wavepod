@@ -12,10 +12,20 @@ const OverlayComponent = ({ open, setOpen }) => {
 	const isHidden = !!open;
 
 	useEffect(() => {
+		const desktopPlayer = document.querySelector('#desktop-player');
+		const mobilePlayer = document.querySelector('#mobile-player');
 		if (open) {
 			document.querySelector('html').classList.add('hide-overflow');
+			if (desktopPlayer || mobilePlayer) {
+				desktopPlayer.style.visibility = 'hidden';
+				mobilePlayer.style.visibility = 'hidden';
+			}
 		} else {
 			document.querySelector('html').classList.remove('hide-overflow');
+			if (desktopPlayer || mobilePlayer) {
+				desktopPlayer.style.visibility = 'visible';
+				mobilePlayer.style.visibility = 'visible';
+			}
 		}
 	});
 

@@ -14,7 +14,7 @@ const Search = () => {
 	return (
 		<SearchWrapper>
 			<MainSearchContent>
-				<MainHeader>laudrr</MainHeader>
+				<MainHeader>Wavepod</MainHeader>
 				<MainContent>
 					<p>Unlimited number of podcasts to listen to</p>
 					<p>Powered by channels and authors all over the world</p>
