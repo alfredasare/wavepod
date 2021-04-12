@@ -14,8 +14,8 @@
 		"validate": "npm-run-all --parallel check-format lint",
 		"prepare": "husky install"
 	},
-	"proxy": "http:localhost:3001",
 	"dependencies": {
+		"axios": "^0.21.1",
 		"gsap": "^3.6.1",
 		"moment": "^2.29.1",
 		"moment-duration-format": "^2.3.2",

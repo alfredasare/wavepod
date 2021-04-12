@@ -5,17 +5,15 @@ import { createStructuredSelector } from 'reselect';
 import PodcastRowList from '@/components/podcast-row-list/podcastRowListComponent';
 import Search from '@/components/search/searchComponent';
 
-import { setCurrentPodcast } from '../../lib/redux/player/player.actions';
-import { selectCurrentPodcast } from '../../lib/redux/player/player.selectors';
+import { getChannelsStart } from '../../lib/redux/channel/channel.actions';
+import { selectAllChannels } from '../../lib/redux/channel/channel.selectors';
 
-const Podcasts = ({ currentPodcast, setCurrentPodcast }) => {
-	console.log(currentPodcast);
+const Podcasts = ({ getAllChannels, allChannels }) => {
+	console.log(allChannels);
 
 	useEffect(() => {
-		setCurrentPodcast({
-			name: 'Alfred',
-		});
-	}, []);
+		getAllChannels();
+	}, [allChannels]);
 
 	return (
 		<>
@@ -26,11 +24,11 @@ const Podcasts = ({ currentPodcast, setCurrentPodcast }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-	currentPodcast: selectCurrentPodcast,
+	allChannels: selectAllChannels,
 });
 
 const mapDispatchToProps = dispatch => ({
-	setCurrentPodcast: podcast => dispatch(setCurrentPodcast(podcast)),
+	getAllChannels: () => dispatch(getChannelsStart()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Podcasts);
