@@ -4,7 +4,7 @@ export const DesktopPlayerContainer = styled.div`
 	display: none;
 
 	@media screen and (min-width: 768px) {
-		display: block;
+		display: ${({ hasVisited }) => (hasVisited ? 'block' : 'none')};
 	}
 `;
 

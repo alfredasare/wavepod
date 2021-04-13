@@ -1,4 +1,7 @@
 import dynamic from 'next/dynamic';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import Audio from '@/components/audio/audioComponent';
 import FastForward from '@/components/svg/fastForward';
@@ -7,6 +10,7 @@ import Pause from '@/components/svg/pause';
 import Rewind from '@/components/svg/rewind';
 import usePlayer from '@/hooks/usePlayer';
 
+import { selectCurrentPodcast } from '../../lib/redux/player/player.selectors';
 import {
 	DesktopPlayer,
 	DesktopPlayerContainer,
@@ -25,7 +29,7 @@ import {
 
 const Slider = dynamic(() => import('../slider/sliderComponent'));
 
-const DesktopPlayerComponent = () => {
+const DesktopPlayerComponent = ({ currentPodcast }) => {
 	const {
 		playing,
 		setPlaying,
@@ -38,7 +42,7 @@ const DesktopPlayerComponent = () => {
 	} = usePlayer();
 
 	return (
-		<DesktopPlayerContainer>
+		<DesktopPlayerContainer hasVisited={!!currentPodcast.title}>
 			<DesktopPlayer id='desktop-player'>
 				<SliderContainer>
 					<Slider
@@ -50,14 +54,14 @@ const DesktopPlayerComponent = () => {
 				<MainContainer>
 					<TitleColumn>
 						<TitleImage>
-							<img src='/images/images.jpg' alt='channel pic' />
+							<img
+								src={currentPodcast.channelImg}
+								alt={`${currentPodcast.channelName} podcast`}
+							/>
 						</TitleImage>
 						<TitleContent>
-							<Title>
-								TWiT 792: Get Out of My Grocery Aisle - iPhone 12 Preview -
-								Congress vs Big Tech - Oracle vs Google. Lorem
-							</Title>
-							<Subtitle>Channel Owner</Subtitle>
+							<Title>{currentPodcast.title}</Title>
+							<Subtitle>{currentPodcast.channelName}</Subtitle>
 						</TitleContent>
 					</TitleColumn>
 
@@ -102,9 +106,17 @@ const DesktopPlayerComponent = () => {
 					</OtherControlsColumn>
 				</MainContainer>
 			</DesktopPlayer>
-			<Audio src='/audio/for_KING_COUNTRY_-_Heavenly_Hosts.mp3' />
+			<Audio src={currentPodcast.url} />
 		</DesktopPlayerContainer>
 	);
 };
 
-export default DesktopPlayerComponent;
+DesktopPlayerComponent.propTypes = {
+	currentPodcast: PropTypes.object,
+};
+
+const mapStateToProps = createStructuredSelector({
+	currentPodcast: selectCurrentPodcast,
+});
+
+export default connect(mapStateToProps)(DesktopPlayerComponent);

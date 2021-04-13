@@ -54,7 +54,12 @@ const PodcastDetailsContent = ({ channelId, channelDetails }) => {
 
 			<AvailableEpisodesWrapper>
 				<h3>Available Episodes</h3>
-				<EpisodeList items={channelDetails?.episodes} channelId={channelId} />
+				<EpisodeList
+					items={channelDetails?.episodes}
+					channelId={channelId}
+					channelImg={channelDetails?.img}
+					channelName={channelDetails?.name}
+				/>
 			</AvailableEpisodesWrapper>
 		</PodcastDetailsContentWrapper>
 	);

@@ -17,7 +17,7 @@ const FollowChannel = () => {
 					Subscribe to your favourite channels so you never miss the latest
 					episodes of your favourite shows
 				</HeaderThree>
-				<Link href='/'>
+				<Link href='/podcasts'>
 					<a>VIEW CHANNELS</a>
 				</Link>
 			</FollowChannelText>

@@ -1,5 +1,8 @@
 import dynamic from 'next/dynamic';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import Audio from '@/components/audio/audioComponent';
 import FastForward from '@/components/svg/fastForward';
@@ -11,6 +14,7 @@ import Rewind from '@/components/svg/rewind';
 import usePlayer from '@/hooks/usePlayer';
 import { palette } from '@/utils/colors';
 
+import { selectCurrentPodcast } from '../../lib/redux/player/player.selectors';
 import {
 	Caret,
 	ControlsRow,
@@ -32,7 +36,7 @@ import {
 
 const Slider = dynamic(() => import('../slider/sliderComponent'));
 
-const MobilePlayerComponent = () => {
+const MobilePlayerComponent = ({ currentPodcast }) => {
 	const [expanded, setExpanded] = useState(false);
 	const {
 		playing,
@@ -48,7 +52,7 @@ const MobilePlayerComponent = () => {
 	} = usePlayer();
 
 	return (
-		<MobilePlayerContainer>
+		<MobilePlayerContainer hasVisited={!!currentPodcast.title}>
 			<MobilePlayerOverlay
 				expanded={expanded}
 				onClick={() => setExpanded(!expanded)}
@@ -56,15 +60,15 @@ const MobilePlayerComponent = () => {
 			<MobilePlayer id='mobile-player' expanded={expanded}>
 				<DetailsRow>
 					<DetailsImg onClick={() => setExpanded(!expanded)}>
-						<img src='/images/images.jpg' alt='mkbhd' />
+						<img
+							src={currentPodcast.channelImg}
+							alt={`${currentPodcast.channelName} podcast`}
+						/>
 					</DetailsImg>
 
 					<DetailsText onClick={() => setExpanded(!expanded)}>
-						<Title>
-							TWiT 792: Get Out of My Grocery Aisle - iPhone 12 Preview -
-							Congress vs Big Tech - Oracle vs Google.
-						</Title>
-						<Subtitle>Channel owner</Subtitle>
+						<Title>{currentPodcast.title}</Title>
+						<Subtitle>{currentPodcast.channelName}</Subtitle>
 					</DetailsText>
 
 					<DetailsIcon role='button'>
@@ -127,9 +131,17 @@ const MobilePlayerComponent = () => {
 					<Info />
 				</MiscRow>
 			</MobilePlayer>
-			<Audio src='/audio/for_KING_COUNTRY_-_Heavenly_Hosts.mp3' />
+			<Audio src={currentPodcast.url} />
 		</MobilePlayerContainer>
 	);
 };
 
-export default MobilePlayerComponent;
+MobilePlayerComponent.propTypes = {
+	currentPodcast: PropTypes.object,
+};
+
+const mapStateToProps = createStructuredSelector({
+	currentPodcast: selectCurrentPodcast,
+});
+
+export default connect(mapStateToProps)(MobilePlayerComponent);

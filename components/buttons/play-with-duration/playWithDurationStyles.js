@@ -13,6 +13,7 @@ export const PlayButtonWithTime = styled.div`
 	align-items: center;
 	margin-bottom: 20px;
 	padding-left: 10px;
+	cursor: pointer;
 
 	span {
 		font-size: 0.8rem;

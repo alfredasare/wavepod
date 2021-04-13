@@ -30,6 +30,12 @@ export const PodcastTitleContainer = styled.div`
 		margin: 0;
 		font-weight: 400;
 		font-size: 0.9rem;
+		display: inline-block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
 
 		&:nth-child(2) {
 			color: rgba(0, 0, 0, 0.5);

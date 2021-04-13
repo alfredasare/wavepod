@@ -11,7 +11,7 @@ const useFormatTime = url => {
 	};
 
 	const audio = new Audio(url);
-	audio.preload = 'metadata';
+	audio.preload = 'none';
 	audio.addEventListener('loadeddata', () => {
 		setTime(formatDuration(audio.duration));
 	});

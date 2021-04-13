@@ -51,12 +51,14 @@ const EpisodeDetailsContent = ({ episode, isLoading }) => {
 			</EpisodeDetailsHeader>
 
 			<AvailableEpisodesWrapper>
-				<h3>More episodes from {episode.channel.name}</h3>
+				<h3>More episodes from {episode?.channel.name}</h3>
 				<EpisodeList
 					items={episode?.channel.episodes.filter(
 						item => item.id !== episode?.id,
 					)}
 					channelId={episode?.channel.id}
+					channelName={episode?.channel.name}
+					channelImg={episode?.channel.img}
 				/>
 			</AvailableEpisodesWrapper>
 		</EpisodeDetailsContentWrapper>

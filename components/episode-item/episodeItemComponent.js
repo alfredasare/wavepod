@@ -12,7 +12,7 @@ import {
 	EpisodeTitle,
 } from './episodeItemStyles';
 
-const EpisodeItem = ({ channelId, episode }) => {
+const EpisodeItem = ({ channelId, episode, channelName, channelImg }) => {
 	const { time } = useFormatTime(episode.url);
 	const { days } = useFormatDate(episode.uploaded);
 
@@ -23,7 +23,12 @@ const EpisodeItem = ({ channelId, episode }) => {
 					<DateUploaded>{days}</DateUploaded>
 					<EpisodeTitle>{episode.title}</EpisodeTitle>
 					<EpisodeSummary>{episode.description}</EpisodeSummary>
-					<PlayWithDuration duration={time ? `${time}` : `--`} />
+					<PlayWithDuration
+						duration={time ? `${time}` : `--`}
+						episode={episode}
+						channelName={channelName}
+						channelImg={channelImg}
+					/>
 				</EpisodeItemWrapper>
 			</a>
 		</Link>
@@ -33,6 +38,8 @@ const EpisodeItem = ({ channelId, episode }) => {
 EpisodeItem.propTypes = {
 	channelId: PropTypes.string,
 	episode: PropTypes.object,
+	channelName: PropTypes.string,
+	channelImg: PropTypes.string,
 };
 
 export default EpisodeItem;

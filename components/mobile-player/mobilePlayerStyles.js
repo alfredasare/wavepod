@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const MobilePlayerContainer = styled.div`
+	display: ${({ hasVisited }) => (hasVisited ? 'block' : 'none')};
+
 	@media screen and (min-width: 768px) {
 		display: none;
 	}
@@ -79,6 +81,12 @@ export const Subtitle = styled.div`
 	font-size: 0.75rem;
 	font-weight: 400;
 	margin-top: 5px;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
 `;
 
 export const DetailsIcon = styled.div`
