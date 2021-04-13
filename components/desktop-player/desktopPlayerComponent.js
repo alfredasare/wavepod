@@ -57,7 +57,7 @@ const DesktopPlayerComponent = () => {
 								TWiT 792: Get Out of My Grocery Aisle - iPhone 12 Preview -
 								Congress vs Big Tech - Oracle vs Google. Lorem
 							</Title>
-							<Subtitle>30 mins left</Subtitle>
+							<Subtitle>Channel Owner</Subtitle>
 						</TitleContent>
 					</TitleColumn>
 

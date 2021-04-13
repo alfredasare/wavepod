@@ -64,7 +64,7 @@ const MobilePlayerComponent = () => {
 							TWiT 792: Get Out of My Grocery Aisle - iPhone 12 Preview -
 							Congress vs Big Tech - Oracle vs Google.
 						</Title>
-						<Subtitle>This Week in Tech (Audio)</Subtitle>
+						<Subtitle>Channel owner</Subtitle>
 					</DetailsText>
 
 					<DetailsIcon role='button'>

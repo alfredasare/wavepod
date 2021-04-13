@@ -83,6 +83,7 @@ export const PodcastDetailsSummary = styled.div`
 
 export const AvailableEpisodesWrapper = styled.div`
 	margin-top: 40px;
+	padding-bottom: 85px;
 	h3 {
 		font-weight: 400;
 	}

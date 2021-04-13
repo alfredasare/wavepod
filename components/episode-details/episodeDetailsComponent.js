@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import EpisodeList from '@/components/episode-list/episodeListComponent';
 import { AvailableEpisodesWrapper } from '@/components/podcast-details/podcastDetailsStyles';
 import Play from '@/components/svg/play';
+import useFormatDate from '@/hooks/useFormatDate';
+import useFormatTime from '@/hooks/useFormatTime';
 
 import {
 	EpisodeDateAndDuration,
@@ -19,6 +21,9 @@ import {
 } from './episodeDetailsStyles';
 
 const EpisodeDetailsContent = ({ episode, isLoading }) => {
+	const { time } = useFormatTime(episode?.url);
+	const { days } = useFormatDate(episode?.uploaded);
+
 	if (isLoading) {
 		return <h1>Loading</h1>;
 	}
@@ -31,7 +36,7 @@ const EpisodeDetailsContent = ({ episode, isLoading }) => {
 				</Link>
 				<EpisodeHeaderTitle>{episode?.title}</EpisodeHeaderTitle>
 				<EpisodeDateAndDuration>
-					{episode?.uploaded} · 10 min
+					{days} · {time ? time.toString() : '--'} mins
 				</EpisodeDateAndDuration>
 
 				<PlayEpisodeButton role='button'>
@@ -46,9 +51,7 @@ const EpisodeDetailsContent = ({ episode, isLoading }) => {
 			</EpisodeDetailsHeader>
 
 			<AvailableEpisodesWrapper>
-				<h3>
-					More episodes from The Daily Show With Trevor Noah: Ears Edition
-				</h3>
+				<h3>More episodes from {episode.channel.name}</h3>
 				<EpisodeList
 					items={episode?.channel.episodes.filter(
 						item => item.id !== episode?.id,
