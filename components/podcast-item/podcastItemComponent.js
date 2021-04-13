@@ -7,22 +7,22 @@ import {
 	PodcastTitleContainer,
 } from './podcastItemStyles';
 
-const PodcastItem = ({ id }) => {
+const PodcastItem = ({ channel }) => {
 	return (
 		<PodcastItemWrapper>
 			<PodcastImageWrapper>
-				<Link href={`/feed/${id}`}>
+				<Link href={`/feed/${channel.id}`}>
 					<a>
-						<img src='/images/images.jpg' alt='' />
+						<img src={channel.img} alt='' />
 					</a>
 				</Link>
 			</PodcastImageWrapper>
 
 			<PodcastTitleContainer>
-				<Link href={`/feed/${id}`}>
+				<Link href={`/feed/${channel.id}`}>
 					<a>
-						<p>Episode Title</p>
-						<p>Channel Name</p>
+						<p>{channel.name}</p>
+						<p>{channel.owner}</p>
 					</a>
 				</Link>
 			</PodcastTitleContainer>
@@ -31,7 +31,7 @@ const PodcastItem = ({ id }) => {
 };
 
 PodcastItem.propTypes = {
-	id: PropTypes.string,
+	channel: PropTypes.object,
 };
 
 export default PodcastItem;

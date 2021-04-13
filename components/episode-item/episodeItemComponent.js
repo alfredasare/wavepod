@@ -10,22 +10,14 @@ import {
 	EpisodeTitle,
 } from './episodeItemStyles';
 
-const EpisodeItem = ({ id, channelId }) => {
+const EpisodeItem = ({ channelId, episode }) => {
 	return (
-		<Link href={`/feed/${channelId}/${id}`}>
+		<Link href={`/feed/${channelId}/${episode.id}`}>
 			<a>
 				<EpisodeItemWrapper>
-					<DateUploaded>3 days ago</DateUploaded>
-					<EpisodeTitle>
-						Microsoft Surface Duo, Samsung &apos;Nope&apos; 20, & an Airpower
-						Competitor
-					</EpisodeTitle>
-					<EpisodeSummary>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
-						doloremque dolores enim explicabo ipsam iusto, minima nihil officia
-						perspiciatis placeat praesentium qui quis reiciendis similique
-						temporibus vero vitae, voluptatem voluptates.
-					</EpisodeSummary>
+					<DateUploaded>{episode.uploaded}</DateUploaded>
+					<EpisodeTitle>{episode.title}</EpisodeTitle>
+					<EpisodeSummary>{episode.description}</EpisodeSummary>
 					<PlayWithDuration duration='10' />
 				</EpisodeItemWrapper>
 			</a>
@@ -34,8 +26,8 @@ const EpisodeItem = ({ id, channelId }) => {
 };
 
 EpisodeItem.propTypes = {
-	id: PropTypes.string,
 	channelId: PropTypes.string,
+	episode: PropTypes.object,
 };
 
 export default EpisodeItem;

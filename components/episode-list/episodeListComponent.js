@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
-import { v4 } from 'uuid';
 
 import EpisodeItem from '@/components/episode-item/episodeItemComponent';
 
 const EpisodeList = ({ items, channelId }) => {
 	return (
 		<div>
-			{items.map(() => (
-				<EpisodeItem key={v4()} id={v4()} channelId={channelId} />
+			{items?.map(episode => (
+				<EpisodeItem key={episode.id} episode={episode} channelId={channelId} />
 			))}
 		</div>
 	);

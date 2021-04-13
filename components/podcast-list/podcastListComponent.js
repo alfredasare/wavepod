@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
-import { v4 } from 'uuid';
 
 import PodcastItem from '@/components/podcast-item/podcastItemComponent';
 
@@ -54,10 +53,10 @@ const PodcastList = ({ items }) => {
 	return (
 		<PodcastListWrapper>
 			<Carousel className='owl-theme' {...options}>
-				{items.map(() => {
+				{items.map(channel => {
 					return (
-						<div key={v4()} className='item'>
-							<PodcastItem id={v4()} />
+						<div key={channel.id} className='item'>
+							<PodcastItem channel={channel} />
 						</div>
 					);
 				})}

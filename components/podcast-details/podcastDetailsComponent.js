@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 import EpisodeList from '@/components/episode-list/episodeListComponent';
@@ -16,46 +15,46 @@ import {
 	PodcastDetailsTitle,
 } from './podcastDetailsStyles';
 
-const PodcastDetailsContent = ({ channelId }) => {
+const PodcastDetailsContent = ({ channelId, channelDetails }) => {
 	return (
 		<PodcastDetailsContentWrapper>
 			<PodcastDetailsHeader>
 				<PodcastDetailsHeaderLeftColumn>
-					<PodcastDetailsTitle>Waveform: The MKBHD Podcast</PodcastDetailsTitle>
-					<PodcastDetailsChannelName>Studio71</PodcastDetailsChannelName>
+					<PodcastDetailsTitle>{channelDetails?.name}</PodcastDetailsTitle>
+					<PodcastDetailsChannelName>
+						{channelDetails?.owner}
+					</PodcastDetailsChannelName>
 				</PodcastDetailsHeaderLeftColumn>
 
 				<PodcastDetailsChannelImage>
-					<img src='/images/max-wolfs-yrVv6pwVp78-unsplash.jpg' alt='' />
+					<img
+						src={channelDetails?.img}
+						alt={`${channelDetails?.name} podcast`}
+					/>
 				</PodcastDetailsChannelImage>
 			</PodcastDetailsHeader>
 
 			<PodcastDetailsButtonRow>
-				<Link href='/'>
-					<PodcastDetailsButton>Subscribe</PodcastDetailsButton>
-				</Link>
-				<Link href='/'>
-					<PodcastDetailsButton>Visit website</PodcastDetailsButton>
-				</Link>
+				{/*<Link href='/'>*/}
+				{/*	<PodcastDetailsButton>Subscribe</PodcastDetailsButton>*/}
+				{/*</Link>*/}
+				{channelDetails?.websiteUrl && (
+					<PodcastDetailsButton
+						target='_blank'
+						href={channelDetails?.websiteUrl}
+					>
+						Visit website
+					</PodcastDetailsButton>
+				)}
 			</PodcastDetailsButtonRow>
 
 			<PodcastDetailsSummary>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
-					rerum unde vero. Aliquid ea fugit ratione voluptates? Et, optio,
-					possimus? Animi error eum fugiat itaque nam natus nihil placeat unde!
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
-					rerum unde vero. Aliquid ea fugit ratione voluptates? Et, optio,
-					possimus? Animi error eum fugiat itaque nam natus nihil placeat unde!
-				</p>
+				<p>{channelDetails?.description}</p>
 			</PodcastDetailsSummary>
 
 			<AvailableEpisodesWrapper>
 				<h3>Available Episodes</h3>
-				<EpisodeList
-					items={[11, 12, 13, 14, 15, 16, 17]}
-					channelId={channelId}
-				/>
+				<EpisodeList items={channelDetails?.episodes} channelId={channelId} />
 			</AvailableEpisodesWrapper>
 		</PodcastDetailsContentWrapper>
 	);
@@ -63,6 +62,7 @@ const PodcastDetailsContent = ({ channelId }) => {
 
 PodcastDetailsContent.propTypes = {
 	channelId: PropTypes.string,
+	channelDetails: PropTypes.object,
 };
 
 export default PodcastDetailsContent;

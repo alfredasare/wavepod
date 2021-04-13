@@ -6,14 +6,16 @@ import PodcastRowList from '@/components/podcast-row-list/podcastRowListComponen
 import Search from '@/components/search/searchComponent';
 
 import { getChannelsStart } from '../../lib/redux/channel/channel.actions';
-import { selectAllChannels } from '../../lib/redux/channel/channel.selectors';
+import { selectIsLoading } from '../../lib/redux/channel/channel.selectors';
 
-const Podcasts = ({ getAllChannels, allChannels }) => {
-	console.log(allChannels);
-
+const Podcasts = ({ getAllChannels, isLoading }) => {
 	useEffect(() => {
 		getAllChannels();
-	}, [allChannels]);
+	}, []);
+
+	if (isLoading) {
+		return <h1>Loading</h1>;
+	}
 
 	return (
 		<>
@@ -24,7 +26,7 @@ const Podcasts = ({ getAllChannels, allChannels }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-	allChannels: selectAllChannels,
+	isLoading: selectIsLoading,
 });
 
 const mapDispatchToProps = dispatch => ({
