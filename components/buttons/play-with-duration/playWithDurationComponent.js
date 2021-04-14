@@ -39,28 +39,18 @@ const PlayWithDuration = ({
 		});
 
 		if (isPlaying === false && episode.id === currentPodcast.id) {
-			console.log('condition 1');
 			setPlaying(true);
 			togglePlaying(true);
 		} else if (episode.id !== currentPodcast.id) {
-			console.log('condition 2');
 			audio.addEventListener('loadedmetadata', () => {
 				setPlaying(true);
 				togglePlaying(true);
 			});
 		} else {
-			console.log('condition 3');
 			setPlaying(false);
 			togglePlaying(false);
 		}
 	};
-
-	// const handlePause = e => {
-	// 	e.preventDefault();
-	// 	console.log("handlePause")
-	// 	setPlaying(false);
-	// 	togglePlaying(episode.id);
-	// };
 
 	return (
 		<PlayButtonWithTime role='button' onClick={handlePlay}>
