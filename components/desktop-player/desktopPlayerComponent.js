@@ -26,12 +26,12 @@ import {
 	TitleContent,
 	TitleImage,
 } from './desktopPlayerStyles';
+// import {toggleIsPlaying} from "../../lib/redux/player/player.actions";
 
 const Slider = dynamic(() => import('../slider/sliderComponent'));
 
 const DesktopPlayerComponent = ({ currentPodcast }) => {
 	const {
-		playing,
 		setPlaying,
 		forwardByTen,
 		reverseByTen,
@@ -39,6 +39,7 @@ const DesktopPlayerComponent = ({ currentPodcast }) => {
 		currentTime,
 		setClickedTime,
 		formatDuration,
+		playing,
 	} = usePlayer();
 
 	return (
@@ -113,10 +114,20 @@ const DesktopPlayerComponent = ({ currentPodcast }) => {
 
 DesktopPlayerComponent.propTypes = {
 	currentPodcast: PropTypes.object,
+	isPlaying: PropTypes.bool,
+	// togglePlaying: PropTypes.func
 };
 
 const mapStateToProps = createStructuredSelector({
 	currentPodcast: selectCurrentPodcast,
+	// isPlaying: selectIsPlaying
 });
 
-export default connect(mapStateToProps)(DesktopPlayerComponent);
+const mapDispatchToProps = () => ({
+	// togglePlaying: id => dispatch(toggleIsPlaying(id))
+});
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(DesktopPlayerComponent);

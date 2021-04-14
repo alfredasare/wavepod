@@ -22,7 +22,7 @@ const usePlayer = () => {
 
 		const setAudioTime = () => setCurrentTime(audio.currentTime);
 
-		audio.addEventListener('loadeddata', setAudioData);
+		audio.addEventListener('loadedmetadata', setAudioData);
 		audio.addEventListener('timeupdate', () => {
 			setAudioTime();
 			if (audio.currentTime === audio.duration) {

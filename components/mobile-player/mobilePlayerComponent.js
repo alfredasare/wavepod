@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { connect } from 'react-redux';
@@ -33,6 +34,7 @@ import {
 	Subtitle,
 	Title,
 } from './mobilePlayerStyles';
+// import {toggleIsPlaying} from "../../lib/redux/player/player.actions";
 
 const Slider = dynamic(() => import('../slider/sliderComponent'));
 
@@ -128,7 +130,17 @@ const MobilePlayerComponent = ({ currentPodcast }) => {
 					<div onClick={() => toggleLoop()} aria-hidden='true'>
 						<Loop fill={toggled ? palette.radicalRed : '#0000008A'} />
 					</div>
-					<Info />
+					<div
+						role='button'
+						onClick={() => setExpanded(false)}
+						aria-hidden='true'
+					>
+						<Link href={`/feed/${currentPodcast.channel}/${currentPodcast.id}`}>
+							<a>
+								<Info />
+							</a>
+						</Link>
+					</div>
 				</MiscRow>
 			</MobilePlayer>
 			<Audio src={currentPodcast.url} />
@@ -138,10 +150,20 @@ const MobilePlayerComponent = ({ currentPodcast }) => {
 
 MobilePlayerComponent.propTypes = {
 	currentPodcast: PropTypes.object,
+	// isPlaying: PropTypes.bool,
+	// togglePlaying: PropTypes.func
 };
 
 const mapStateToProps = createStructuredSelector({
 	currentPodcast: selectCurrentPodcast,
+	// isPlaying: selectIsPlaying
 });
 
-export default connect(mapStateToProps)(MobilePlayerComponent);
+const mapDispatchToProps = () => ({
+	// togglePlaying: id => dispatch(toggleIsPlaying(id))
+});
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(MobilePlayerComponent);
