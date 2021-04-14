@@ -1,27 +1,28 @@
 import 'moment-duration-format';
 
 import moment from 'moment';
+import { useEffect, useState } from 'react';
 
 const useFormatDate = date => {
 	const today = moment(new Date());
 	const uploaded = moment(new Date(date));
-	const days = today.diff(uploaded, 'days');
 
-	const daysLeft = days => {
-		switch (days) {
-			case days > 1:
-				return `${days} days ago`;
+	const [days, setDays] = useState('----');
 
-			case days === 1:
-				return `1 day ago`;
+	useEffect(() => {
+		const daysBetween = today.diff(uploaded, 'days');
 
-			default:
-				return `Less than a day ago`;
+		if (daysBetween > 1) {
+			setDays(`${daysBetween} days ago`);
+		} else if (daysBetween === 1) {
+			setDays(`1 day ago`);
+		} else {
+			setDays(`Less than a day ago`);
 		}
-	};
+	}, [date]);
 
 	return {
-		days: daysLeft(days),
+		days,
 	};
 };
 
