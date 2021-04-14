@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -8,8 +7,14 @@ import Equalizer from '@/components/svg/equalizer';
 import PlayWithCircle from '@/components/svg/playWithCircle';
 import usePlayer from '@/hooks/usePlayer';
 
-import { setCurrentPodcast } from '../../../lib/redux/player/player.actions';
-import { selectCurrentPodcast } from '../../../lib/redux/player/player.selectors';
+import {
+	setCurrentPodcast,
+	toggleIsPlaying,
+} from '../../../lib/redux/player/player.actions';
+import {
+	selectCurrentPodcast,
+	selectIsPlaying,
+} from '../../../lib/redux/player/player.selectors';
 
 const PlayWithDuration = ({
 	duration,
@@ -18,12 +23,12 @@ const PlayWithDuration = ({
 	channelName,
 	channelImg,
 	currentPodcast,
-	// togglePlaying,
-	// isPlaying
+	togglePlaying,
+	isPlaying,
 }) => {
-	const { setPlaying, playing } = usePlayer();
+	const { setPlaying } = usePlayer();
 
-	useEffect(() => {}, []);
+	const audio = document.querySelector('#wavepod-audio');
 
 	const handlePlay = e => {
 		e.preventDefault();
@@ -32,20 +37,34 @@ const PlayWithDuration = ({
 			channelName,
 			channelImg,
 		});
-		setPlaying(true);
+
+		if (isPlaying === false && episode.id === currentPodcast.id) {
+			console.log('condition 1');
+			setPlaying(true);
+			togglePlaying(true);
+		} else if (episode.id !== currentPodcast.id) {
+			console.log('condition 2');
+			audio.addEventListener('loadedmetadata', () => {
+				setPlaying(true);
+				togglePlaying(true);
+			});
+		} else {
+			console.log('condition 3');
+			setPlaying(false);
+			togglePlaying(false);
+		}
 	};
 
-	const handlePause = e => {
-		e.preventDefault();
-		setPlaying(false);
-	};
+	// const handlePause = e => {
+	// 	e.preventDefault();
+	// 	console.log("handlePause")
+	// 	setPlaying(false);
+	// 	togglePlaying(episode.id);
+	// };
 
 	return (
-		<PlayButtonWithTime
-			role='button'
-			onClick={playing ? handlePause : handlePlay}
-		>
-			{playing && episode.id === currentPodcast.id ? (
+		<PlayButtonWithTime role='button' onClick={handlePlay}>
+			{isPlaying && episode.id === currentPodcast.id ? (
 				<>
 					<Equalizer />
 				</>
@@ -65,18 +84,18 @@ PlayWithDuration.propTypes = {
 	setPodcastEpisode: PropTypes.func,
 	channelName: PropTypes.string,
 	channelImg: PropTypes.string,
-	// togglePlaying: PropTypes.func,
-	// isPlaying: PropTypes.bool
+	togglePlaying: PropTypes.func,
+	isPlaying: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
 	currentPodcast: selectCurrentPodcast,
-	// isPlaying: selectIsPlaying
+	isPlaying: selectIsPlaying,
 });
 
 const mapDispatchToProps = dispatch => ({
 	setPodcastEpisode: episode => dispatch(setCurrentPodcast(episode)),
-	// togglePlaying: id => dispatch(toggleIsPlaying(id))
+	togglePlaying: playing => dispatch(toggleIsPlaying(playing)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayWithDuration);

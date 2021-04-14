@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 const usePlayer = () => {
 	const [duration, setDuration] = useState();
 	const [currentTime, setCurrentTime] = useState();
-	const [playing, setPlaying] = useState(false);
+	const [playing, setIsPlaying] = useState(false);
 	const [clickedTime, setClickedTime] = useState();
 	const [toggled, setToggled] = useState(false);
 
@@ -26,12 +26,10 @@ const usePlayer = () => {
 		audio.addEventListener('timeupdate', () => {
 			setAudioTime();
 			if (audio.currentTime === audio.duration) {
-				setPlaying(false);
+				setIsPlaying(false);
 				setCurrentTime(0);
 			}
 		});
-
-		playing ? audio.play() : audio.pause();
 
 		if (clickedTime && clickedTime !== currentTime) {
 			audio.currentTime = clickedTime;
@@ -61,6 +59,12 @@ const usePlayer = () => {
 		return moment
 			.duration(duration, 'seconds')
 			.format('mm:ss', { trim: false });
+	};
+
+	const setPlaying = play => {
+		setIsPlaying(play);
+		if (play) audio.play();
+		else audio.pause();
 	};
 
 	return {

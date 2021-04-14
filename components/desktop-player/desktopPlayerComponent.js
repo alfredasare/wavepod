@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -10,7 +11,14 @@ import Pause from '@/components/svg/pause';
 import Rewind from '@/components/svg/rewind';
 import usePlayer from '@/hooks/usePlayer';
 
-import { selectCurrentPodcast } from '../../lib/redux/player/player.selectors';
+import {
+	resetIsPlaying,
+	toggleIsPlaying,
+} from '../../lib/redux/player/player.actions';
+import {
+	selectCurrentPodcast,
+	selectIsPlaying,
+} from '../../lib/redux/player/player.selectors';
 import {
 	DesktopPlayer,
 	DesktopPlayerContainer,
@@ -26,11 +34,17 @@ import {
 	TitleContent,
 	TitleImage,
 } from './desktopPlayerStyles';
+
 // import {toggleIsPlaying} from "../../lib/redux/player/player.actions";
 
 const Slider = dynamic(() => import('../slider/sliderComponent'));
 
-const DesktopPlayerComponent = ({ currentPodcast }) => {
+const DesktopPlayerComponent = ({
+	currentPodcast,
+	isPlaying,
+	togglePlaying,
+	resetPlaying,
+}) => {
 	const {
 		setPlaying,
 		forwardByTen,
@@ -39,8 +53,11 @@ const DesktopPlayerComponent = ({ currentPodcast }) => {
 		currentTime,
 		setClickedTime,
 		formatDuration,
-		playing,
 	} = usePlayer();
+
+	useEffect(() => {
+		resetPlaying();
+	}, []);
 
 	return (
 		<DesktopPlayerContainer hasVisited={!!currentPodcast.title}>
@@ -75,19 +92,25 @@ const DesktopPlayerComponent = ({ currentPodcast }) => {
 								onClick={reverseByTen}
 							/>
 
-							{!playing ? (
+							{!isPlaying ? (
 								<LargePlay
 									fill='#0000008A'
 									height='23px'
 									width='23px'
-									onClick={() => setPlaying(true)}
+									onClick={() => {
+										setPlaying(true);
+										togglePlaying(true);
+									}}
 								/>
 							) : (
 								<Pause
 									fill='#0000008A'
 									height='30px'
 									width='30px'
-									onClick={() => setPlaying(false)}
+									onClick={() => {
+										setPlaying(false);
+										togglePlaying(false);
+									}}
 								/>
 							)}
 
@@ -115,16 +138,18 @@ const DesktopPlayerComponent = ({ currentPodcast }) => {
 DesktopPlayerComponent.propTypes = {
 	currentPodcast: PropTypes.object,
 	isPlaying: PropTypes.bool,
-	// togglePlaying: PropTypes.func
+	togglePlaying: PropTypes.func,
+	resetPlaying: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
 	currentPodcast: selectCurrentPodcast,
-	// isPlaying: selectIsPlaying
+	isPlaying: selectIsPlaying,
 });
 
-const mapDispatchToProps = () => ({
-	// togglePlaying: id => dispatch(toggleIsPlaying(id))
+const mapDispatchToProps = dispatch => ({
+	togglePlaying: playing => dispatch(toggleIsPlaying(playing)),
+	resetPlaying: () => dispatch(resetIsPlaying()),
 });
 
 export default connect(

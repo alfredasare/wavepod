@@ -15,7 +15,11 @@ import Rewind from '@/components/svg/rewind';
 import usePlayer from '@/hooks/usePlayer';
 import { palette } from '@/utils/colors';
 
-import { selectCurrentPodcast } from '../../lib/redux/player/player.selectors';
+import { toggleIsPlaying } from '../../lib/redux/player/player.actions';
+import {
+	selectCurrentPodcast,
+	selectIsPlaying,
+} from '../../lib/redux/player/player.selectors';
 import {
 	Caret,
 	ControlsRow,
@@ -34,14 +38,16 @@ import {
 	Subtitle,
 	Title,
 } from './mobilePlayerStyles';
-// import {toggleIsPlaying} from "../../lib/redux/player/player.actions";
 
 const Slider = dynamic(() => import('../slider/sliderComponent'));
 
-const MobilePlayerComponent = ({ currentPodcast }) => {
+const MobilePlayerComponent = ({
+	currentPodcast,
+	isPlaying,
+	togglePlaying,
+}) => {
 	const [expanded, setExpanded] = useState(false);
 	const {
-		playing,
 		setPlaying,
 		forwardByTen,
 		reverseByTen,
@@ -76,19 +82,25 @@ const MobilePlayerComponent = ({ currentPodcast }) => {
 					<DetailsIcon role='button'>
 						{expanded ? (
 							<Caret>&rsaquo;</Caret>
-						) : playing ? (
+						) : isPlaying ? (
 							<Pause
 								width='15px'
 								height='15px'
 								fill='#0000008A'
-								onClick={() => setPlaying(false)}
+								onClick={() => {
+									setPlaying(false);
+									togglePlaying(false);
+								}}
 							/>
 						) : (
 							<LargePlay
 								width='15px'
 								height='15px'
 								fill='#0000008A'
-								onClick={() => setPlaying(true)}
+								onClick={() => {
+									setPlaying(true);
+									togglePlaying(true);
+								}}
 							/>
 						)}
 					</DetailsIcon>
@@ -112,12 +124,22 @@ const MobilePlayerComponent = ({ currentPodcast }) => {
 					<MobileControlIcon onClick={reverseByTen}>
 						<Rewind fill='#0000008A' width='30' height='30' />
 					</MobileControlIcon>
-					{!playing ? (
-						<MobileControlIcon onClick={() => setPlaying(true)}>
+					{!isPlaying ? (
+						<MobileControlIcon
+							onClick={() => {
+								setPlaying(true);
+								togglePlaying(true);
+							}}
+						>
 							<LargePlay fill='#0000008A' height='30px' width='30px' />
 						</MobileControlIcon>
 					) : (
-						<MobileControlIcon onClick={() => setPlaying(false)}>
+						<MobileControlIcon
+							onClick={() => {
+								setPlaying(false);
+								togglePlaying(false);
+							}}
+						>
 							<Pause fill='#0000008A' height='30px' width='30px' />
 						</MobileControlIcon>
 					)}
@@ -150,17 +172,17 @@ const MobilePlayerComponent = ({ currentPodcast }) => {
 
 MobilePlayerComponent.propTypes = {
 	currentPodcast: PropTypes.object,
-	// isPlaying: PropTypes.bool,
-	// togglePlaying: PropTypes.func
+	isPlaying: PropTypes.bool,
+	togglePlaying: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
 	currentPodcast: selectCurrentPodcast,
-	// isPlaying: selectIsPlaying
+	isPlaying: selectIsPlaying,
 });
 
-const mapDispatchToProps = () => ({
-	// togglePlaying: id => dispatch(toggleIsPlaying(id))
+const mapDispatchToProps = dispatch => ({
+	togglePlaying: playing => dispatch(toggleIsPlaying(playing)),
 });
 
 export default connect(
