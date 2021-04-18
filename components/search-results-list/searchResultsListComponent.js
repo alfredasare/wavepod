@@ -12,7 +12,7 @@ import {
 	selectSearchIsLoading,
 	selectSearchResults,
 } from '../../lib/redux/search/search.selectors';
-import { SearchResultsWrapper, ShowWrapper } from './searchResultsListStyles';
+import { ShowWrapper } from './searchResultsListStyles';
 
 const Carousel = dynamic(() => import('react-owl-carousel'), { ssr: false });
 
@@ -61,7 +61,7 @@ const SearchResultsList = ({ error, isLoading, results }) => {
 	}
 
 	return (
-		<SearchResultsWrapper>
+		<>
 			<h3>Episode results</h3>
 			{results?.episodes?.map(episode => (
 				<EpisodeSearchItem key={episode.item.id} episode={episode.item} />
@@ -75,7 +75,7 @@ const SearchResultsList = ({ error, isLoading, results }) => {
 					))}
 				</Carousel>
 			</ShowWrapper>
-		</SearchResultsWrapper>
+		</>
 	);
 };
 

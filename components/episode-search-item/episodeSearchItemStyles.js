@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const EpisodeSearchItemWrapper = styled.div`
 	padding-bottom: 10px;
 	margin-bottom: 40px;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	border-bottom: 0.8px solid rgba(0, 0, 0, 0.1);
 	color: black;
 
 	@media screen and (min-width: 768px) {

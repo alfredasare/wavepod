@@ -39,11 +39,17 @@ const Search = ({ search }) => {
 					<p>Powered by channels and authors all over the world</p>
 				</MainContent>
 				<SearchForm onSubmit={handleSubmit}>
-					<SearchButton>
+					<SearchButton bgColor='#f1f3f4'>
 						<ButtonIcon className='fas fa-search' />
 					</SearchButton>
 					<SearchInputContainer>
-						<SearchInput type='search' value={query} onChange={handleChange} />
+						<SearchInput
+							type='search'
+							value={query}
+							onChange={handleChange}
+							color='#111'
+							bgColor='none'
+						/>
 					</SearchInputContainer>
 				</SearchForm>
 			</MainSearchContent>

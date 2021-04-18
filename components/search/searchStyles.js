@@ -71,7 +71,7 @@ export const MainContent = styled.div`
 export const SearchForm = styled.form`
 	margin-top: 40px;
 	margin-bottom: 30px;
-	border-radius: 4px;
+	border-radius: 8px;
 	background-color: #f5f5f5;
 	height: 54px;
 	display: flex;
@@ -85,8 +85,9 @@ export const SearchButton = styled.button`
 	box-shadow: none;
 	border: none;
 	padding: 0;
-	background-color: transparent;
+	background-color: ${({ bgColor }) => (bgColor ? bgColor : 'transparent')};
 	text-align: inherit;
+	border-radius: 8px;
 
 	&:hover {
 		box-shadow: none;
@@ -117,9 +118,10 @@ export const SearchInput = styled.input`
 	padding-right: 14px;
 	flex-grow: 1;
 	width: 100%;
-	background: none;
+	background: ${({ bgColor }) => bgColor};
 	border: none;
-	color: #111;
+	border-radius: 8px;
+	color: ${({ color }) => color};
 	font-size: 0.9rem;
 
 	&:focus {
