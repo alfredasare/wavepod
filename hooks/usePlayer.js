@@ -22,8 +22,8 @@ const usePlayer = () => {
 
 		const setAudioTime = () => setCurrentTime(audio.currentTime);
 
-		audio.addEventListener('loadeddata', setAudioData);
-		audio.addEventListener('timeupdate', () => {
+		audio?.addEventListener('loadeddata', setAudioData);
+		audio?.addEventListener('timeupdate', () => {
 			setAudioTime();
 			if (audio.currentTime === audio.duration) {
 				setIsPlaying(false);
@@ -37,8 +37,8 @@ const usePlayer = () => {
 		}
 
 		return () => {
-			audio.removeEventListener('loadeddata', setAudioData);
-			audio.removeEventListener('timeupdate', setAudioTime);
+			audio?.removeEventListener('loadeddata', setAudioData);
+			audio?.removeEventListener('timeupdate', setAudioTime);
 		};
 	}, [playing, clickedTime]);
 

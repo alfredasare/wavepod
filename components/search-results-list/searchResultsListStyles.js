@@ -23,4 +23,6 @@ export const SearchResultsWrapper = styled.div`
 	}
 `;
 
-export const ShowWrapper = styled.div``;
+export const ShowWrapper = styled.div`
+	padding-bottom: 60px;
+`;

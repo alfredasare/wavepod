@@ -54,7 +54,7 @@ const PlayWithDuration = ({
 
 	return (
 		<PlayButtonWithTime role='button' onClick={handlePlay}>
-			{isPlaying && episode.id === currentPodcast.id ? (
+			{isPlaying && episode?.id === currentPodcast.id ? (
 				<>
 					<Equalizer />
 				</>

@@ -1,16 +1,22 @@
 import dynamic from 'next/dynamic';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import EpisodeSearchItem from '@/components/episode-search-item/episodeSearchItemComponent';
 import PodcastItem from '@/components/podcast-item/podcastItemComponent';
 
+import { searchStart } from '../../lib/redux/search/search.actions';
+import {
+	selectSearchError,
+	selectSearchIsLoading,
+	selectSearchResults,
+} from '../../lib/redux/search/search.selectors';
 import { SearchResultsWrapper, ShowWrapper } from './searchResultsListStyles';
 
 const Carousel = dynamic(() => import('react-owl-carousel'), { ssr: false });
 
-const SearchResultsList = () => {
-	const shows = [1, 2, 3];
-	const episodes = [1, 2, 3, 4, 5, 6];
-
+const SearchResultsList = ({ error, isLoading, results }) => {
 	const options = {
 		loop: false,
 		responsive: {
@@ -46,18 +52,26 @@ const SearchResultsList = () => {
 		},
 	};
 
+	if (isLoading) {
+		return <h1>Loading..........</h1>;
+	}
+
+	if (error) {
+		return <h1>An error occurred</h1>;
+	}
+
 	return (
 		<SearchResultsWrapper>
 			<h3>Episode results</h3>
-			{episodes.map(episode => (
-				<EpisodeSearchItem key={episode * 1000} />
+			{results?.episodes?.map(episode => (
+				<EpisodeSearchItem key={episode.item.id} episode={episode.item} />
 			))}
 
 			<h3>Show results</h3>
 			<ShowWrapper>
 				<Carousel className='owl-theme' {...options}>
-					{shows.map(show => (
-						<PodcastItem key={show * 110} />
+					{results?.channels?.map(channel => (
+						<PodcastItem key={channel.item.id} channel={channel.item} />
 					))}
 				</Carousel>
 			</ShowWrapper>
@@ -65,4 +79,21 @@ const SearchResultsList = () => {
 	);
 };
 
-export default SearchResultsList;
+SearchResultsList.propTypes = {
+	search: PropTypes.func,
+	isLoading: PropTypes.bool,
+	error: PropTypes.string,
+	results: PropTypes.object,
+};
+
+const mapStateToProps = createStructuredSelector({
+	isLoading: selectSearchIsLoading,
+	error: selectSearchError,
+	results: selectSearchResults,
+});
+
+const mapDispatchToProps = dispatch => ({
+	search: query => dispatch(searchStart(query)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchResultsList);

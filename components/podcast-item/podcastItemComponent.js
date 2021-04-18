@@ -11,18 +11,18 @@ const PodcastItem = ({ channel }) => {
 	return (
 		<PodcastItemWrapper>
 			<PodcastImageWrapper>
-				<Link href={`/feed/${channel.id}`}>
+				<Link href={`/feed/${channel?.id}`}>
 					<a>
-						<img src={channel.img} alt='' />
+						<img src={channel?.img} alt={`${channel?.name} channel`} />
 					</a>
 				</Link>
 			</PodcastImageWrapper>
 
 			<PodcastTitleContainer>
-				<Link href={`/feed/${channel.id}`}>
+				<Link href={`/feed/${channel?.id}`}>
 					<a>
-						<p>{channel.name}</p>
-						<p>{channel.owner}</p>
+						<p>{channel?.name}</p>
+						<p>{channel?.owner}</p>
 					</a>
 				</Link>
 			</PodcastTitleContainer>
