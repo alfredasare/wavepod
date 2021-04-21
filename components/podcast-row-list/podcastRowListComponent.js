@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { v4 } from 'uuid';
@@ -9,12 +10,14 @@ import { selectAllChannels } from '../../lib/redux/channel/channel.selectors';
 import { ProductListRowWrapper } from './podcastRowListStyles';
 
 const PodcastRowList = ({ allChannels }) => {
+	useEffect(() => {}, [allChannels]);
+
 	return (
 		<ProductListRowWrapper>
 			{['Business', 'News', 'Society and Culture', 'Science', 'Tech'].map(
 				category => {
 					const filteredChannels = allChannels.filter(channel =>
-						channel?.category.includes(category),
+						channel.category.includes(category),
 					);
 					return (
 						<PodcastRow
