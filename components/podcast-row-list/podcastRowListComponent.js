@@ -17,6 +17,7 @@ const PodcastRowList = ({ allChannels }) => {
 	}
 
 	if (allChannels.length > 0) {
+		console.log(allChannels);
 		return (
 			<ProductListRowWrapper>
 				{['Business', 'News', 'Society and Culture', 'Science', 'Tech'].map(
