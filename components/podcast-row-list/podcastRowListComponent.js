@@ -12,24 +12,30 @@ import { ProductListRowWrapper } from './podcastRowListStyles';
 const PodcastRowList = ({ allChannels }) => {
 	useEffect(() => {}, [allChannels]);
 
-	return (
-		<ProductListRowWrapper>
-			{['Business', 'News', 'Society and Culture', 'Science', 'Tech'].map(
-				category => {
-					const filteredChannels = allChannels.filter(channel =>
-						channel.category.includes(category),
-					);
-					return (
-						<PodcastRow
-							key={v4()}
-							title={category}
-							channels={filteredChannels}
-						/>
-					);
-				},
-			)}
-		</ProductListRowWrapper>
-	);
+	if (allChannels.length === 0) {
+		return <h1>Loading</h1>;
+	}
+
+	if (allChannels.length > 0) {
+		return (
+			<ProductListRowWrapper>
+				{['Business', 'News', 'Society and Culture', 'Science', 'Tech'].map(
+					category => {
+						const filteredChannels = allChannels.filter(channel =>
+							channel.category.includes(category),
+						);
+						return (
+							<PodcastRow
+								key={v4()}
+								title={category}
+								channels={filteredChannels}
+							/>
+						);
+					},
+				)}
+			</ProductListRowWrapper>
+		);
+	}
 };
 
 PodcastRowList.propTypes = {
