@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
@@ -28,6 +29,9 @@ const PodcastDetails = ({ getChannelDetails, isLoading, channelDetails }) => {
 
 	return (
 		<>
+			<Head>
+				<title>{channelDetails.name} Channel | Wavepod</title>
+			</Head>
 			<PodcastDetailsContent
 				channelId={channelId}
 				channelDetails={channelDetails}

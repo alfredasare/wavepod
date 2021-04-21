@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
@@ -28,6 +29,9 @@ const EpisodeDetailsPage = ({ episode, isLoading, getEpisode }) => {
 
 	return (
 		<>
+			<Head>
+				<title>{episode.title} | Wavepod</title>
+			</Head>
 			<EpisodeDetailsContent episode={episode} isLoading={isLoading} />
 		</>
 	);

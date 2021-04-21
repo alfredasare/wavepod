@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -19,6 +20,9 @@ const Podcasts = ({ getAllChannels, isLoading }) => {
 
 	return (
 		<>
+			<Head>
+				<title>Podcast Channels | Wavepod</title>
+			</Head>
 			<Search />
 			<PodcastRowList />
 		</>
