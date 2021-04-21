@@ -30,7 +30,7 @@ const EpisodeDetailsPage = ({ episode, isLoading, getEpisode }) => {
 	return (
 		<>
 			<Head>
-				<title>{episode.title} | Wavepod</title>
+				<title>{episode?.title} | Wavepod</title>
 			</Head>
 			<EpisodeDetailsContent episode={episode} isLoading={isLoading} />
 		</>
