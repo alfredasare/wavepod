@@ -16,27 +16,24 @@ const PodcastRowList = ({ allChannels }) => {
 		return <h1>Loading</h1>;
 	}
 
-	if (allChannels.length > 0) {
-		console.log(allChannels);
-		return (
-			<ProductListRowWrapper>
-				{['Business', 'News', 'Society and Culture', 'Science', 'Tech'].map(
-					category => {
-						const filteredChannels = allChannels.filter(channel =>
-							channel.category.includes(category),
-						);
-						return (
-							<PodcastRow
-								key={v4()}
-								title={category}
-								channels={filteredChannels}
-							/>
-						);
-					},
-				)}
-			</ProductListRowWrapper>
-		);
-	}
+	return (
+		<ProductListRowWrapper>
+			{['Business', 'News', 'Society and Culture', 'Science', 'Tech'].map(
+				category => {
+					const filteredChannels = allChannels.filter(channel =>
+						channel.category.includes(category),
+					);
+					return (
+						<PodcastRow
+							key={v4()}
+							title={category}
+							channels={filteredChannels}
+						/>
+					);
+				},
+			)}
+		</ProductListRowWrapper>
+	);
 };
 
 PodcastRowList.propTypes = {
