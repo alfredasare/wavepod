@@ -9,6 +9,7 @@ const usePlayer = () => {
 	const [playing, setIsPlaying] = useState(false);
 	const [clickedTime, setClickedTime] = useState();
 	const [toggled, setToggled] = useState(false);
+	const [buffering, setBuffering] = useState(false);
 
 	const audio = document.querySelector('#wavepod-audio');
 
@@ -21,6 +22,18 @@ const usePlayer = () => {
 		};
 
 		const setAudioTime = () => setCurrentTime(audio.currentTime);
+
+		audio?.addEventListener('waiting', () => {
+			setBuffering(true);
+		});
+
+		// audio?.addEventListener('loadstart', () => {
+		// 	setBuffering(true);
+		// });
+
+		audio?.addEventListener('playing', () => {
+			setBuffering(false);
+		});
 
 		audio?.addEventListener('loadeddata', setAudioData);
 		audio?.addEventListener('timeupdate', () => {
@@ -78,6 +91,7 @@ const usePlayer = () => {
 		toggleLoop,
 		toggled,
 		formatDuration,
+		buffering,
 	};
 };
 

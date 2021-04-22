@@ -53,6 +53,7 @@ const DesktopPlayerComponent = ({
 		currentTime,
 		setClickedTime,
 		formatDuration,
+		buffering,
 	} = usePlayer();
 
 	useEffect(() => {
@@ -79,7 +80,9 @@ const DesktopPlayerComponent = ({
 						</TitleImage>
 						<TitleContent>
 							<Title>{currentPodcast.title}</Title>
-							<Subtitle>{currentPodcast.channelName}</Subtitle>
+							<Subtitle>
+								{buffering ? 'Buffering...' : currentPodcast.channelName}
+							</Subtitle>
 						</TitleContent>
 					</TitleColumn>
 

@@ -57,6 +57,7 @@ const MobilePlayerComponent = ({
 		toggleLoop,
 		toggled,
 		formatDuration,
+		buffering,
 	} = usePlayer();
 
 	return (
@@ -76,7 +77,9 @@ const MobilePlayerComponent = ({
 
 					<DetailsText onClick={() => setExpanded(!expanded)}>
 						<Title>{currentPodcast.title}</Title>
-						<Subtitle>{currentPodcast.channelName}</Subtitle>
+						<Subtitle>
+							{buffering ? 'Buffering...' : currentPodcast.channelName}
+						</Subtitle>
 					</DetailsText>
 
 					<DetailsIcon role='button'>
