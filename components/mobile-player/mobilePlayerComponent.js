@@ -81,7 +81,7 @@ const MobilePlayerComponent = ({
 
 					<DetailsIcon role='button'>
 						{expanded ? (
-							<Caret>&rsaquo;</Caret>
+							<Caret onClick={() => setExpanded(!expanded)}>&rsaquo;</Caret>
 						) : isPlaying ? (
 							<Pause
 								width='15px'
