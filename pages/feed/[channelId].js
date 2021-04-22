@@ -30,7 +30,7 @@ const PodcastDetails = ({ getChannelDetails, isLoading, channelDetails }) => {
 	return (
 		<>
 			<Head>
-				<title>{channelDetails.name} Channel | Wavepod</title>
+				<title>{channelDetails?.name} Channel | Wavepod</title>
 			</Head>
 			<PodcastDetailsContent
 				channelId={channelId}

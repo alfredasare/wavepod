@@ -41,7 +41,7 @@ const EpisodeSearchItem = ({ episode }) => {
 								<TextColumnDate>{days}</TextColumnDate>
 							</div>
 						</ImageShowDateWrapper>
-						<TextColumnTitle>Wed 10/07 – {episode.title}</TextColumnTitle>
+						<TextColumnTitle>{episode.title}</TextColumnTitle>
 						<TextColumnSummary>{episode.description}</TextColumnSummary>
 						<PlayWithDuration
 							duration={time ? `${time}` : `--`}
