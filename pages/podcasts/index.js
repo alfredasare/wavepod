@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import LoaderComponent from '@/components/loader/loaderComponent';
 import PodcastRowList from '@/components/podcast-row-list/podcastRowListComponent';
 import Search from '@/components/search/searchComponent';
 
@@ -15,7 +16,7 @@ const Podcasts = ({ getAllChannels, isLoading }) => {
 	}, []);
 
 	if (isLoading) {
-		return <h1>Loading</h1>;
+		return <LoaderComponent />;
 	}
 
 	return (

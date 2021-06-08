@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import EpisodeSearchItem from '@/components/episode-search-item/episodeSearchItemComponent';
+import LoaderComponent from '@/components/loader/loaderComponent';
 import PodcastItem from '@/components/podcast-item/podcastItemComponent';
 
 import { searchStart } from '../../lib/redux/search/search.actions';
@@ -53,7 +54,7 @@ const SearchResultsList = ({ error, isLoading, results }) => {
 	};
 
 	if (isLoading) {
-		return <h1>Loading..........</h1>;
+		return <LoaderComponent height='50vh' />;
 	}
 
 	if (error) {

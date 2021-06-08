@@ -18,20 +18,25 @@ const PodcastRowList = ({ allChannels }) => {
 
 	return (
 		<ProductListRowWrapper>
-			{['Business', 'News', 'Society and Culture', 'Science', 'Tech'].map(
-				category => {
-					const filteredChannels = allChannels.filter(channel =>
-						channel.category.includes(category),
-					);
-					return (
-						<PodcastRow
-							key={v4()}
-							title={category}
-							channels={filteredChannels}
-						/>
-					);
-				},
-			)}
+			{[
+				'Featured',
+				'Business',
+				'News',
+				'Society and Culture',
+				'Science',
+				'Tech',
+			].map(category => {
+				const filteredChannels = allChannels.filter(channel => {
+					if (category === 'Featured') {
+						return true;
+					} else {
+						return channel.category.includes(category);
+					}
+				});
+				return (
+					<PodcastRow key={v4()} title={category} channels={filteredChannels} />
+				);
+			})}
 		</ProductListRowWrapper>
 	);
 };

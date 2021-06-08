@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import EpisodeDetailsContent from '@/components/episode-details/episodeDetailsComponent';
+import LoaderComponent from '@/components/loader/loaderComponent';
 
 import { getEpisodeStart } from '../../../lib/redux/episode/episode.actions';
 import {
@@ -24,7 +25,7 @@ const EpisodeDetailsPage = ({ episode, isLoading, getEpisode }) => {
 	}, [episodeId]);
 
 	if (isLoading) {
-		return <h1>Loading</h1>;
+		return <LoaderComponent />;
 	}
 
 	return (

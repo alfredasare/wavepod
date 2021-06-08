@@ -21,6 +21,10 @@ export const FollowChannelWrapper = styled.section`
 		height: 80vh;
 		align-items: center;
 	}
+
+	@media screen and (min-width: 2000px) {
+		height: auto;
+	}
 `;
 
 export const FollowChannelText = styled.div`

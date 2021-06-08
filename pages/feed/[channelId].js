@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import LoaderComponent from '@/components/loader/loaderComponent';
 import PodcastDetailsContent from '@/components/podcast-details/podcastDetailsComponent';
 
 import { getChannelDetailsStart } from '../../lib/redux/channel/channel.actions';
@@ -24,7 +25,7 @@ const PodcastDetails = ({ getChannelDetails, isLoading, channelDetails }) => {
 	}, [channelId]);
 
 	if (isLoading) {
-		return <h1>Loading</h1>;
+		return <LoaderComponent />;
 	}
 
 	return (

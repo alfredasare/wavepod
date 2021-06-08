@@ -29,10 +29,3 @@ export default function Home() {
 		</>
 	);
 }
-
-/* eslint-disable no-unused-vars */
-export const getStaticProps = async context => {
-	return {
-		props: {},
-	};
-};
