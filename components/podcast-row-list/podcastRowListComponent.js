@@ -12,10 +12,6 @@ import { ProductListRowWrapper } from './podcastRowListStyles';
 const PodcastRowList = ({ allChannels }) => {
 	useEffect(() => {}, [allChannels]);
 
-	if (allChannels.length === 0) {
-		return <h1>Loading</h1>;
-	}
-
 	return (
 		<ProductListRowWrapper>
 			{[

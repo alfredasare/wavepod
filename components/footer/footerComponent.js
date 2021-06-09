@@ -38,10 +38,10 @@ const Footer = () => {
 
 					<Contact>
 						<h2>Get in touch</h2>
-						<h4>We communicate primarily via mail</h4>
-						<h4>Contact us on </h4>{' '}
-						<a href='mailto:info@laudrr.com?subject=Contact%laudrr'>
-							info@wavepod.com
+						<h4>Send me an email</h4>
+						<h4>Contact me on </h4>{' '}
+						<a href='mailto:alfredasare101@gmail.com?subject=Contact%alfred'>
+							alfredasare101@gmail.com
 						</a>
 					</Contact>
 				</SecondRow>
